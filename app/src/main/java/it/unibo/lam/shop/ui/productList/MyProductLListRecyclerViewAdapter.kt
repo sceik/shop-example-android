@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import it.unibo.lam.shop.R
 import it.unibo.lam.shop.data.product.Product
 

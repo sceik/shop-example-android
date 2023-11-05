@@ -49,7 +49,14 @@ This branch contains an example that introduces the concept of Fragments in Andr
 - Fragment lifecycle
 - Communication between Fragments and Activities
 
-To check out this example, you can use:
+### remote-api
+
+This branch contains an example that introduces the concept of remote API Call in Android. It includes:
+
+- How use Retrofit lib
+- Coroutines examples
+- Gleed for image load
+
 
 ```bash
 git checkout fragment-introduction
@@ -69,12 +76,10 @@ We welcome contributions from everyone and we are looking forward to your amazin
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ## Contact
 
-If you have any questions or want to reach out to the maintainer, please send an email to `youremail@example.com`.
+If you have any questions or want to reach out to the maintainer, please send an email to `cirofinizio91@example.com`.
 
 ---
-
-This README provides a basic template to get you started. Make sure to customize each section according to the specific details and requirements of your project.

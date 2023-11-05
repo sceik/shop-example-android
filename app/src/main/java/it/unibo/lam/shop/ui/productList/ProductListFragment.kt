@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
 import it.unibo.lam.shop.R
 import it.unibo.lam.shop.data.product.local.ProductRepository
 
