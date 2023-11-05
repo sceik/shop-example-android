@@ -7,10 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
 import it.unibo.lam.shop.R
 import it.unibo.lam.shop.data.product.Product
-import it.unibo.lam.shop.data.product.local.ProductRepository
+import it.unibo.lam.shop.data.product.remote.ProductRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,12 +40,14 @@ class ProductDetailsFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_product_details, container, false)
 
         this.productId?.let {
-            val product = ProductRepository.getProduct(it)
-            if (product != null) {
-                popolateView(product, view)
+            GlobalScope.launch(Dispatchers.IO) {
+                val product = ProductRepository.getProduct(it)
+                withContext(Dispatchers.Main) {
+                    // Update the LiveData with the list of products
+                    popolateView(product!!, view)
+                }
             }
         }
-
         return view
     }
 
@@ -54,7 +61,7 @@ class ProductDetailsFragment : Fragment() {
         descriptionText.text = product.description
         priceText.text = product.price.toString()
         categoryText.text = product.category.name
-        setImageOnView(product.images.get(0), imageView)
+        setImageFromUrlOnView(product.images.get(0), imageView)
     }
 
 
@@ -66,6 +73,12 @@ class ProductDetailsFragment : Fragment() {
             // La risorsa specificata non esiste
             // Gestire questa situazione in modo appropriato
         }
+    }
+
+    fun setImageFromUrlOnView(url: String, imageView: ImageView) {
+        Glide.with(imageView.context)
+            .load(url)
+            .into(imageView)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

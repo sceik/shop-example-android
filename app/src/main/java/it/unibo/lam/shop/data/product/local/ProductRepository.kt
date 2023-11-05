@@ -8,7 +8,7 @@ import java.util.HashMap
 
 object ProductRepository : ProductRepository() {
 
-    private lateinit var products: MutableList<Product>
+    private var products: MutableList<Product>
 
     init {
         val ELEMENT = 25
@@ -18,11 +18,11 @@ object ProductRepository : ProductRepository() {
         }
     }
 
-    override fun getProducts(): List<Product>? {
+    override suspend fun getProducts(): List<Product>? {
         return products
     }
 
-    override fun getProduct(productID: Int): Product? {
+    override suspend fun getProduct(productID: Int): Product? {
         return products.find {
             it.id == productID
         }

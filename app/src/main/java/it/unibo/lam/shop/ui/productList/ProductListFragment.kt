@@ -7,7 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import it.unibo.lam.shop.R
-import it.unibo.lam.shop.data.product.local.ProductRepository
+import it.unibo.lam.shop.data.product.remote.ProductRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A fragment representing a list of Items.
@@ -25,10 +29,15 @@ class ProductListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_product_list, container, false) as RecyclerView
 
         val adapter = MyProductLListRecyclerViewAdapter()
-        // Read an Set product on view
-        val products = ProductRepository.getProducts()
-        if (products != null) {
-            adapter.setProducts(products)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val products = ProductRepository.getProducts()
+            withContext(Dispatchers.Main) {
+                // Update the LiveData with the list of products
+                if (products != null) {
+                    adapter.setProducts(products)
+                }
+            }
         }
         view.adapter = adapter
 
