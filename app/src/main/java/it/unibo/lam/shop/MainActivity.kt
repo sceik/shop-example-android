@@ -1,9 +1,12 @@
 package it.unibo.lam.shop
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import it.unibo.lam.shop.data.user.UserRepository
+import it.unibo.lam.shop.ui.login.LoginActivity
 import it.unibo.lam.shop.ui.productList.ProductListFragment
 import it.unibo.lam.shop.ui.productPage.ProductDetailsFragment
 
@@ -12,6 +15,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (!UserRepository.getInstance(applicationContext).isLoggedIn()) {
+            val loginActivityIntent = Intent(this, LoginActivity::class.java);
+            startActivity(loginActivityIntent)
+            finish()
+        }
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
