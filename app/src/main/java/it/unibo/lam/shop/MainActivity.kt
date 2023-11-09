@@ -8,7 +8,6 @@ import androidx.appcompat.widget.Toolbar
 import it.unibo.lam.shop.data.user.UserRepository
 import it.unibo.lam.shop.ui.login.LoginActivity
 import it.unibo.lam.shop.ui.productList.ProductListFragment
-import it.unibo.lam.shop.ui.productPage.ProductDetailsFragment
 
 class MainActivity : AppCompatActivity() {
 

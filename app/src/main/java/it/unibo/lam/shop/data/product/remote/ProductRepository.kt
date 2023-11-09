@@ -1,12 +1,7 @@
 package it.unibo.lam.shop.data.product.remote
 
-import android.util.Log
 import it.unibo.lam.shop.data.product.Product
 import it.unibo.lam.shop.data.product.ProductRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,13 +9,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ProductRepository : ProductRepository(){
 
     var productAPI : ProductAPI;
+    val API_URL = "https://api.escuelajs.co"
 
     init {
         productAPI = getInstance().create(ProductAPI::class.java)
     }
 
     private fun getInstance(): Retrofit {
-        return Retrofit.Builder().baseUrl("https://api.escuelajs.co/")
+        return Retrofit.Builder().baseUrl(API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

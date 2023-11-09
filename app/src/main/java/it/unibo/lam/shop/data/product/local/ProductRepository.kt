@@ -3,8 +3,6 @@ package it.unibo.lam.shop.data.product.local
 import it.unibo.lam.shop.data.product.Category
 import it.unibo.lam.shop.data.product.Product
 import it.unibo.lam.shop.data.product.ProductRepository
-import java.util.ArrayList
-import java.util.HashMap
 
 object ProductRepository : ProductRepository() {
 

@@ -1,11 +1,11 @@
 package it.unibo.lam.shop.ui.productList
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import it.unibo.lam.shop.R
 import it.unibo.lam.shop.data.product.remote.ProductRepository
 import kotlinx.coroutines.Dispatchers

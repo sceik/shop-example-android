@@ -1,14 +1,13 @@
 package it.unibo.lam.shop.ui.productList
 
 import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import it.unibo.lam.shop.R
 import it.unibo.lam.shop.data.product.Product
-
 import it.unibo.lam.shop.databinding.FragmentProductRowBinding
 import it.unibo.lam.shop.ui.productPage.ProductDetailsFragment
 
