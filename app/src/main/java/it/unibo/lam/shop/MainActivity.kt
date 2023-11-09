@@ -5,7 +5,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import it.unibo.lam.shop.ui.productList.ProductListFragment
-import it.unibo.lam.shop.ui.productPage.ProductDetailsFragment
 
 class MainActivity : AppCompatActivity() {
 
