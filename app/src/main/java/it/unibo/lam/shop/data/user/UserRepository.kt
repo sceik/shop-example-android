@@ -15,8 +15,6 @@ class UserRepository(context: Context) {
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences("UserLocalStorage", Context.MODE_PRIVATE)
 
-    // in-memory cache of the loggedInUser object
-
     fun isLoggedIn(): Boolean {
         return getUser() != null;
     }
