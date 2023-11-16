@@ -5,21 +5,35 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import it.unibo.lam.shop.data.user.sharedpreference.UserRepository
+import it.unibo.lam.shop.data.user.database.UserRepository
 import it.unibo.lam.shop.ui.login.LoginActivity
 import it.unibo.lam.shop.ui.productList.ProductListFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+
+    private fun startLogin() {
+        val loginActivityIntent = Intent(this, LoginActivity::class.java);
+        startActivity(loginActivityIntent)
+        finish()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (!UserRepository.getInstance(applicationContext).isLoggedIn()) {
-            val loginActivityIntent = Intent(this, LoginActivity::class.java);
-            startActivity(loginActivityIntent)
-            finish()
+        GlobalScope.launch(Dispatchers.IO) {
+            val userLogged = UserRepository.getInstance(applicationContext).isLoggedIn()
+            withContext(Dispatchers.Main) {
+                if (!userLogged) {
+                    startLogin()
+                }
+            }
         }
+
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)

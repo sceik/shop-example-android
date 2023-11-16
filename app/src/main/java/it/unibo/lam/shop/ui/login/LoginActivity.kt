@@ -8,8 +8,13 @@ import android.content.Intent
 import android.widget.Button
 import android.widget.EditText
 import it.unibo.lam.shop.MainActivity
-import it.unibo.lam.shop.data.user.sharedpreference.UserRepository
-import it.unibo.lam.shop.data.user.sharedpreference.User
+import it.unibo.lam.shop.data.product.remote.ProductRepository
+import it.unibo.lam.shop.data.user.database.UserRepository
+import it.unibo.lam.shop.data.user.database.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
@@ -69,15 +74,23 @@ class LoginActivity : AppCompatActivity() {
 
     private fun saveLoginDetails() {
         val user = User(
+            emailEditText.text.toString(),
             firstNameEditText.text.toString(),
             lastNameEditText.text.toString(),
-            emailEditText.text.toString(),
             dateOfBirthEditText.text.toString(),
             passwordEditText.text.toString()
         )
-        // Salva il nuovo utente creato nelle preferenze
-        UserRepository.getInstance(applicationContext).saveUser(user)
-        // Ritorna il controllo all'actvity principale
+        GlobalScope.launch(Dispatchers.IO) {
+            // Salva il nuovo utente creato
+            UserRepository.getInstance(applicationContext).saveUser(user)
+            withContext(Dispatchers.Main) {
+                // Ritorna il controllo all'actvity principale
+                startMain()
+            }
+        }
+    }
+
+    private fun startMain() {
         val mainActivityIntent = Intent(this, MainActivity::class.java);
         startActivity(mainActivityIntent)
         finish()
