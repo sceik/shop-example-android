@@ -1,19 +1,26 @@
-package it.unibo.lam.shop.data.user
+package it.unibo.lam.shop.data.user.sharedpreference
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Base64
-import it.unibo.lam.shop.data.user.model.User
 
-/**
- * Class that requests authentication and user information from the remote data source and
- * maintains an in-memory cache of login status and user credentials information.
- */
 
 class UserRepository(context: Context) {
 
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences("UserLocalStorage", Context.MODE_PRIVATE)
+
+    companion object {
+        var userRepository: UserRepository? = null
+
+        fun getInstance(context: Context): UserRepository {
+            if (userRepository == null) {
+                userRepository = UserRepository(context)
+            }
+            return userRepository as UserRepository
+
+        }
+    }
 
     fun isLoggedIn(): Boolean {
         return getUser() != null;
@@ -54,15 +61,5 @@ class UserRepository(context: Context) {
         // Dummy decryption, replace with real decryption
         return String(Base64.decode(input, Base64.DEFAULT))
     }
-    companion object {
-        var userRepository: UserRepository? = null
 
-        fun getInstance(context: Context): UserRepository {
-            if (userRepository == null) {
-                userRepository = UserRepository(context)
-            }
-            return userRepository as UserRepository
-
-        }
-    }
 }

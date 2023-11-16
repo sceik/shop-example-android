@@ -8,8 +8,8 @@ import android.content.Intent
 import android.widget.Button
 import android.widget.EditText
 import it.unibo.lam.shop.MainActivity
-import it.unibo.lam.shop.data.user.UserRepository
-import it.unibo.lam.shop.data.user.model.User
+import it.unibo.lam.shop.data.user.sharedpreference.UserRepository
+import it.unibo.lam.shop.data.user.sharedpreference.User
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
